@@ -1,0 +1,16 @@
+{
+  "name": "fetchnewstool",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@lmstudio/sdk": "^1.1.1",
+    "@potetotown/google_news_api": "^1.0.3"
+  }
+}
