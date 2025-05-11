@@ -14,7 +14,7 @@ export const fetchNewsTool = tool({
     // language: z.string().min(2).max(2), // ISO 639-1形式の言語コード（例: 'ja'）
     query: z.string().optional(), // 検索キーワード（オプション）
   },
-  implementation: async ({ country,  query }) => {
+  implementation: async ({ country,query }) => {
     try {
       const news = await newsService.getNews({
         country, // 国コード
