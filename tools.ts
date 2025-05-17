@@ -19,17 +19,29 @@ export const googleSearchTool = tool({
     query: z.string().min(1).max(100), // 検索クエリ
   },
   implementation: async ({ query }) => {
-    return await search({
+    const result = await search({
       query,
-      // Specify the result types explicitly ([OrganicResult] is the default, but it is recommended to always specify the result type)
       resultTypes: [OrganicResult, DictionaryResult],
-      // Optional: Customize the request using AxiosRequestConfig (e.g., enabling safe search)
-      requestConfig: {
-        params: {
-          safe: "active",   // Enable "safe mode"
-        },
-      },
     });
+    
+    // forEachではなくmapを使用し、結果を配列として返す
+    const searchResults = result.map(item => {
+      if (item.type === "ORGANIC") {
+        return {
+          title: item.title,
+          url: item.link,
+          description: item.description
+        }
+      } else if (item.type === "DICTIONARY") {
+        return {
+          title: item.word,
+          url: item.meanings,
+        }
+      }
+      return null;
+    }).filter(item => item !== null); // nullの項目を除外
+    
+    return searchResults;
   }
 })
 
