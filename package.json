@@ -3,6 +3,9 @@
   "module": "index.ts",
   "type": "module",
   "private": true,
+  "scripts": {
+    "build:search": "bun build search.ts  --compile --outfile search.exe"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },

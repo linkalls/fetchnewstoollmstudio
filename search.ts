@@ -22,10 +22,13 @@ const searchQuery = await input({ message: 'なにについて調べたいです
 
 // ニュース取得と要約
 await model.act(
-  `${searchQuery}というものについてユーザーは調べたいようですが最適なクエリで検索してください。要約には根拠となるurlをつけてください。基本は日本語で検索してください。詳しいサイトの情報が入るならばそのサイトの内容も取得して確認してください。`,
+  `${searchQuery}というものについてユーザーは調べたいようですが最適なクエリで検索してください。要約には根拠となるurlをつけてください。基本は日本語で検索してください。詳しいサイトの情報がいるならばそのサイトの内容も取得して確認してください。要約のみを出力してください`,
   [googleSearchTool,websiteContentTool],
   {
     onMessage: (message) => console.info(message.toString()),
+    onFirstToken: () => console.info("応答を生成中..."),
+    onToolCallRequestStart:()=> console.info("ツール呼び出しを開始します..."),
+    onToolCallRequestEnd: () => console.info("ツール呼び出しが完了しました。"),
   }
 );
 
